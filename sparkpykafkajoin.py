@@ -1,5 +1,5 @@
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import from_json, to_json, col, unbase64, base64, split, expr
+from pyspark.sql.functions import from_json, to_json, col, unbase64, base64, split, expr, struct
 from pyspark.sql.types import StructField, StructType, StringType, BooleanType, ArrayType, DateType, DoubleType
 
 # Create a StructType for the Kafka redis-server topic which has all changes made to Redis.
@@ -7,8 +7,8 @@ kafkaRedisSchema = StructType(
     [
         StructField("key", StringType()),
         StructField("existType", StringType()),
-        StructField("ch", BooleanType()),
-        StructField("incr", BooleanType()),
+        StructField("Ch", BooleanType()),
+        StructField("Incr", BooleanType()),
         StructField("zSetEntries", ArrayType(
             StructType([
                 StructField("element", StringType()),
@@ -20,7 +20,7 @@ kafkaRedisSchema = StructType(
 
 # Create a StructType for the Customer JSON that comes from Redis.
 kafkaCustomerJSONSchema = StructType([
-    StructField("customerName", StringType()),
+    StructField("customer", StringType()),
     StructField("email", StringType()),
     StructField("phone", StringType()),
     StructField("birthDay", StringType())
@@ -83,7 +83,7 @@ kafkaRedisDF = kafkaRedisDF.selectExpr("CAST(value AS string) value")
 #
 # storing them in a temporary view called RedisSortedSet
 kafkaRedisDF.withColumn("value", from_json("value", kafkaRedisSchema))\
-            .select(col('value.existType'), col('value.ch'), col('value.incr'), col('value.zSetEntries'))\
+            .select(col('value.existType'), col('value.Ch'), col('value.Incr'), col('value.zSetEntries'))\
             .createOrReplaceTempView("RedisSortedSet")
 
 # Execute a sql statement against a temporary view, which statement takes the element field from the 0th element in the array of structs and create a column called encodedCustomer
@@ -107,7 +107,7 @@ zSetEntriesEncodedDF = stediApp.sql(
 #
 # with this JSON format: {"customerName":"Sam Test","email":"sam.test@test.com","phone":"8015551212","birthDay":"2001-01-03"}
 zSetEntriesEncodedDF = zSetEntriesEncodedDF.withColumn(
-    "customer", unbase64(col("encodedCustomer").cast("string")))
+    "customer", unbase64(col("encodedCustomer")).cast("string"))
 
 # Parse the JSON in the Customer record and store in a temporary view called CustomerRecords
 zSetEntriesEncodedDF.withColumn("customer", from_json("customer", kafkaCustomerJSONSchema))\
@@ -160,7 +160,7 @@ customerRiskStreamingDF = stediApp.sql(
     "SELECT customer, score FROM CustomerRisk")
 
 # Join the streaming dataframes on the email address to get the risk score and the birth year in the same dataframe
-customerRiskStreamingDF = customerRiskStreamingDF.alias("riskDF").join(
+stediRiskScoreStreamingDF = customerRiskStreamingDF.alias("riskDF").join(
     emailAndBirthYearStreamingDF.alias("customerDF"), col("customerDF.email") == col("riskDF.customer"))
 
 # Sink the joined dataframes to a new kafka topic to send the data to the STEDI graph application
@@ -176,20 +176,11 @@ customerRiskStreamingDF = customerRiskStreamingDF.alias("riskDF").join(
 # +--------------------+-----+--------------------+---------+
 #
 # In this JSON Format {"customer":"Santosh.Fibonnaci@test.com","score":"28.5","email":"Santosh.Fibonnaci@test.com","birthYear":"1963"}
-query = customerRiskStreamingDF.selectExpr("TO_JSON(struct(*)) AS value").writeStream \
-    .outputMode('append') \
+stediRiskScoreStreamingDF.select(to_json(struct(col("*"))).alias("value"))\
+    .writeStream \
     .format("kafka") \
-    .option("kafka.bootstrap.servers", "localhost:9092") \
-    .option("FailOnDataLoss", "false") \
-    .option("checkpointLocation", "checkpoint") \
-    .option("topic", "your_topic_name") \
-    .start()
-
-query_console = customerRiskStreamingDF.selectExpr("TO_JSON(struct(*)) AS value").writeStream \
-    .outputMode('append') \
-    .format('console') \
-    .option('truncate', False) \
-    .start() \
-
-query.awaitTermination()
-query_console.awaitTermination()
+    .option("kafka.bootstrap.servers", "localhost:9092")\
+    .option("topic", "stedi-risk-score")\
+    .option("checkpointLocation", "/tmp/kafkacheckpoint")\
+    .start()\
+    .awaitTermination()

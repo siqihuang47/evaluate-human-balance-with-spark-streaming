@@ -7,8 +7,8 @@ kafkaRedisSchema = StructType(
     [
         StructField("key", StringType()),
         StructField("existType", StringType()),
-        StructField("ch", BooleanType()),
-        StructField("incr", BooleanType()),
+        StructField("Ch", BooleanType()),
+        StructField("Incr", BooleanType()),
         StructField("zSetEntries", ArrayType(
             StructType([
                 StructField("element", StringType()),
@@ -20,7 +20,7 @@ kafkaRedisSchema = StructType(
 
 # Create a StructType for the Customer JSON that comes from Redis- before Spark 3.0.0, schema inference is not automatic
 kafkaCustomerJSONSchema = StructType([
-    StructField("customerName", StringType()),
+    StructField("customer", StringType()),
     StructField("email", StringType()),
     StructField("phone", StringType()),
     StructField("birthDay", StringType())
@@ -84,7 +84,7 @@ kafkaRedisDF = kafkaRedisDF.selectExpr("CAST(value AS string) value")
 #
 # storing them in a temporary view called RedisSortedSet
 kafkaRedisDF.withColumn("value", from_json("value", kafkaRedisSchema))\
-            .select(col('value.existType'), col('value.ch'), col('value.incr'), col('value.zSetEntries'))\
+            .select(col('value.existType'), col('value.Ch'), col('value.Incr'), col('value.zSetEntries'))\
             .createOrReplaceTempView("RedisSortedSet")
 
 # Execute a sql statement against a temporary view, which statement takes the element field from the 0th element in the array of structs and create a column called encodedCustomer
@@ -108,7 +108,7 @@ zSetEntriesEncodedDF = stediApp.sql(
 #
 # with this JSON format: {"customerName":"Sam Test","email":"sam.test@test.com","phone":"8015551212","birthDay":"2001-01-03"}
 zSetEntriesEncodedDF = zSetEntriesEncodedDF.withColumn(
-    "customer", unbase64(col("encodedCustomer").cast("string")))
+    "customer", unbase64(col("encodedCustomer")).cast("string"))
 
 # Parse the JSON in the Customer record and store in a temporary view called CustomerRecords
 zSetEntriesEncodedDF.withColumn("customer", from_json("customer", kafkaCustomerJSONSchema))\

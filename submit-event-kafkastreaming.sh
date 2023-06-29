@@ -1,2 +1,2 @@
 #!/bin/bash
-docker exec -it evaluate_human_balance_with_spark_streaming-spark-1 /opt/bitnami/spark/bin/spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.0.0 /home/workspace/sparkpyeventskafkastreamtoconsole.py | tee ../../spark/logs/eventstream.log 
+docker exec -it evaluate-human-balance-with-spark-streaming-spark-1 /opt/bitnami/spark/bin/spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.0.0 /home/workspace/sparkpyeventskafkastreamtoconsole.py | tee spark/logs/eventstream.log 

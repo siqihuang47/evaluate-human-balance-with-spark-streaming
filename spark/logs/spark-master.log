@@ -1,0 +1,96 @@
+[38;5;6m [38;5;5m03:19:49.27 [0m
+[38;5;6m [38;5;5m03:19:49.34 [0m[1mWelcome to the Bitnami spark container[0m
+[38;5;6m [38;5;5m03:19:49.38 [0mSubscribe to project updates by watching [1mhttps://github.com/bitnami/bitnami-docker-spark[0m
+[38;5;6m [38;5;5m03:19:49.40 [0mSubmit issues and feature requests at [1mhttps://github.com/bitnami/bitnami-docker-spark/issues[0m
+[38;5;6m [38;5;5m03:19:49.44 [0m
+[38;5;6m [38;5;5m03:19:49.60 [0m[38;5;2mINFO [0m ==> ** Starting Spark setup **
+
+starting org.apache.spark.deploy.master.Master, logging to /opt/bitnami/spark/logs/spark--org.apache.spark.deploy.master.Master-1-27e5cd3dc09a.out
+/usr/bin/realpath: /bitnami/spark/conf: No such file or directory
+[38;5;6m [38;5;5m03:19:50.05 [0m[38;5;2mINFO [0m ==> Generating Spark configuration file...
+[38;5;6m [38;5;5m03:19:50.18 [0m[38;5;2mINFO [0m ==> ** Spark setup finished! **
+[38;5;6m [38;5;5m03:19:50.37 [0m[38;5;2mINFO [0m ==> ** Starting Spark in master mode **
+Spark Command: /opt/bitnami/java/bin/java -cp /opt/bitnami/spark/conf/:/opt/bitnami/spark/jars/* -Xmx1g org.apache.spark.deploy.master.Master --host 27e5cd3dc09a --port 7077 --webui-port 8080
+========================================
+Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
+23/06/29 03:19:57 INFO Master: Started daemon with process name: 40@27e5cd3dc09a
+23/06/29 03:19:57 INFO SignalUtils: Registering signal handler for TERM
+23/06/29 03:19:57 INFO SignalUtils: Registering signal handler for HUP
+23/06/29 03:19:57 INFO SignalUtils: Registering signal handler for INT
+23/06/29 03:19:59 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+23/06/29 03:20:00 INFO SecurityManager: Changing view acls to: spark
+23/06/29 03:20:00 INFO SecurityManager: Changing modify acls to: spark
+23/06/29 03:20:00 INFO SecurityManager: Changing view acls groups to: 
+23/06/29 03:20:00 INFO SecurityManager: Changing modify acls groups to: 
+23/06/29 03:20:00 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(spark); groups with view permissions: Set(); users  with modify permissions: Set(spark); groups with modify permissions: Set()
+23/06/29 03:20:01 INFO Utils: Successfully started service 'sparkMaster' on port 7077.
+23/06/29 03:20:01 INFO Master: Starting Spark master at spark://27e5cd3dc09a:7077
+23/06/29 03:20:02 INFO Master: Running Spark version 3.2.1
+23/06/29 03:20:02 INFO Utils: Successfully started service 'MasterUI' on port 8080.
+23/06/29 03:20:03 INFO MasterWebUI: Bound MasterWebUI to 0.0.0.0, and started at http://27e5cd3dc09a:8080
+23/06/29 03:20:04 INFO Master: I have been elected leader! New state: ALIVE
+23/06/29 03:20:04 INFO Master: Registering worker 172.23.0.5:35731 with 1 cores, 1024.0 MiB RAM
+[38;5;6m [38;5;5m03:32:32.36 [0m
+[38;5;6m [38;5;5m03:32:32.38 [0m[1mWelcome to the Bitnami spark container[0m
+[38;5;6m [38;5;5m03:32:32.40 [0mSubscribe to project updates by watching [1mhttps://github.com/bitnami/bitnami-docker-spark[0m
+[38;5;6m [38;5;5m03:32:32.42 [0mSubmit issues and feature requests at [1mhttps://github.com/bitnami/bitnami-docker-spark/issues[0m
+[38;5;6m [38;5;5m03:32:32.44 [0m
+[38;5;6m [38;5;5m03:32:32.58 [0m[38;5;2mINFO [0m ==> ** Starting Spark setup **
+/usr/bin/realpath: /bitnami/spark/conf: No such file or directory
+[38;5;6m [38;5;5m03:32:32.86 [0m[38;5;2mINFO [0m ==> Detected mounted configuration file...
+[38;5;6m [38;5;5m03:32:32.89 [0m[38;5;2mINFO [0m ==> ** Spark setup finished! **
+[38;5;6m [38;5;5m03:32:33.11 [0m[38;5;2mINFO [0m ==> ** Starting Spark in master mode **
+Spark Command: /opt/bitnami/java/bin/java -cp /opt/bitnami/spark/conf/:/opt/bitnami/spark/jars/* -Xmx1g org.apache.spark.deploy.master.Master --host 27e5cd3dc09a --port 7077 --webui-port 8080
+========================================
+Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
+23/06/29 03:32:39 INFO Master: Started daemon with process name: 39@27e5cd3dc09a
+23/06/29 03:32:39 INFO SignalUtils: Registering signal handler for TERM
+23/06/29 03:32:39 INFO SignalUtils: Registering signal handler for HUP
+23/06/29 03:32:39 INFO SignalUtils: Registering signal handler for INT
+23/06/29 03:32:40 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+23/06/29 03:32:40 INFO SecurityManager: Changing view acls to: spark
+23/06/29 03:32:40 INFO SecurityManager: Changing modify acls to: spark
+23/06/29 03:32:40 INFO SecurityManager: Changing view acls groups to: 
+23/06/29 03:32:40 INFO SecurityManager: Changing modify acls groups to: 
+23/06/29 03:32:40 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(spark); groups with view permissions: Set(); users  with modify permissions: Set(spark); groups with modify permissions: Set()
+23/06/29 03:32:42 INFO Utils: Successfully started service 'sparkMaster' on port 7077.
+23/06/29 03:32:42 INFO Master: Starting Spark master at spark://27e5cd3dc09a:7077
+23/06/29 03:32:42 INFO Master: Running Spark version 3.2.1
+23/06/29 03:32:43 INFO Utils: Successfully started service 'MasterUI' on port 8080.
+23/06/29 03:32:43 INFO MasterWebUI: Bound MasterWebUI to 0.0.0.0, and started at http://27e5cd3dc09a:8080
+
+starting org.apache.spark.deploy.master.Master, logging to /opt/bitnami/spark/logs/spark--org.apache.spark.deploy.master.Master-1-27e5cd3dc09a.out
+23/06/29 03:32:44 INFO Master: I have been elected leader! New state: ALIVE
+23/06/29 03:32:45 INFO Master: Registering worker 172.23.0.4:43809 with 1 cores, 1024.0 MiB RAM
+[38;5;6m [38;5;5m03:36:59.93 [0m
+[38;5;6m [38;5;5m03:36:59.96 [0m[1mWelcome to the Bitnami spark container[0m
+[38;5;6m [38;5;5m03:36:59.98 [0mSubscribe to project updates by watching [1mhttps://github.com/bitnami/bitnami-docker-spark[0m
+[38;5;6m [38;5;5m03:37:00.00 [0mSubmit issues and feature requests at [1mhttps://github.com/bitnami/bitnami-docker-spark/issues[0m
+[38;5;6m [38;5;5m03:37:00.02 [0m
+[38;5;6m [38;5;5m03:37:00.13 [0m[38;5;2mINFO [0m ==> ** Starting Spark setup **
+/usr/bin/realpath: /bitnami/spark/conf: No such file or directory
+[38;5;6m [38;5;5m03:37:00.37 [0m[38;5;2mINFO [0m ==> Detected mounted configuration file...
+[38;5;6m [38;5;5m03:37:00.39 [0m[38;5;2mINFO [0m ==> ** Spark setup finished! **
+[38;5;6m [38;5;5m03:37:00.58 [0m[38;5;2mINFO [0m ==> ** Starting Spark in master mode **
+Spark Command: /opt/bitnami/java/bin/java -cp /opt/bitnami/spark/conf/:/opt/bitnami/spark/jars/* -Xmx1g org.apache.spark.deploy.master.Master --host 27e5cd3dc09a --port 7077 --webui-port 8080
+========================================
+Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
+23/06/29 03:37:06 INFO Master: Started daemon with process name: 38@27e5cd3dc09a
+23/06/29 03:37:06 INFO SignalUtils: Registering signal handler for TERM
+23/06/29 03:37:06 INFO SignalUtils: Registering signal handler for HUP
+23/06/29 03:37:06 INFO SignalUtils: Registering signal handler for INT
+23/06/29 03:37:07 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+23/06/29 03:37:07 INFO SecurityManager: Changing view acls to: spark
+23/06/29 03:37:07 INFO SecurityManager: Changing modify acls to: spark
+23/06/29 03:37:07 INFO SecurityManager: Changing view acls groups to: 
+23/06/29 03:37:07 INFO SecurityManager: Changing modify acls groups to: 
+23/06/29 03:37:07 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(spark); groups with view permissions: Set(); users  with modify permissions: Set(spark); groups with modify permissions: Set()
+23/06/29 03:37:09 INFO Utils: Successfully started service 'sparkMaster' on port 7077.
+23/06/29 03:37:09 INFO Master: Starting Spark master at spark://27e5cd3dc09a:7077
+23/06/29 03:37:09 INFO Master: Running Spark version 3.2.1
+23/06/29 03:37:10 INFO Utils: Successfully started service 'MasterUI' on port 8080.
+23/06/29 03:37:10 INFO MasterWebUI: Bound MasterWebUI to 0.0.0.0, and started at http://27e5cd3dc09a:8080
+23/06/29 03:37:11 INFO Master: I have been elected leader! New state: ALIVE
+23/06/29 03:37:12 INFO Master: Registering worker 172.23.0.2:33113 with 1 cores, 1024.0 MiB RAM
+
+starting org.apache.spark.deploy.master.Master, logging to /opt/bitnami/spark/logs/spark--org.apache.spark.deploy.master.Master-1-27e5cd3dc09a.out
