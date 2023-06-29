@@ -27,7 +27,7 @@ The STEDI data science team has configured some real-time data sources using Kaf
 - To connect to the redis instance, from the terminal connect to Redis: 
 
 ```
-docker exec -it nd029-c2-apache-spark-and-spark-streaming_redis_1 redis-cli
+docker exec -it evaluate-human-balance-with-spark-streaming-redis-1 redis-cli
 ```
 
 - Type:
